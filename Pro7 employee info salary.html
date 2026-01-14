@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Information</title>
+    <style>
+        .container {
+            width: 400px;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        label {
+            font-weight: bold; /* fixed typo 'fonmt-weight' */
+        }
+        input {
+            width: 100%;
+            margin: 8px 0;
+            padding: 6px;
+        }
+        button {
+            padding: 9px 15px;
+            font-size: 14px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 15px;
+            background: #eef;
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Employee Information</h2>
+        <label>Employee Name:</label>
+        <input type="text" id="ename">
+        <label>Employee ID:</label>
+        <input type="text" id="eid">
+        <label>Basic Pay:</label>
+        <input type="number" id="basic">
+        <button onclick="Calculate()">Calculate Salary</button>
+        <div class="result" id="output"></div>
+    </div>
+
+    <script>
+        function Calculate() {
+            let ename = document.getElementById("ename").value;
+            let eid = document.getElementById("eid").value;
+            let basic = parseFloat(document.getElementById("basic").value);
+
+            if (isNaN(basic) || basic <= 0) {
+                alert("Please enter a valid Basic Pay!");
+                return;
+            }
+
+            // Salary Calculations
+            let DA = 0.40 * basic;
+            let HRA = 0.20 * basic;
+            let PF = 0.12 * basic;
+            let GrossPay = basic + DA + HRA;
+            let TAX = 0.10 * GrossPay;
+            let Deduction = PF + TAX;
+            let NetPay = GrossPay - Deduction;
+
+            // Display
+            document.getElementById("output").innerHTML =
+                "<b>Employee Name:</b> " + ename + "<br>" +
+                "<b>Employee ID:</b> " + eid + "<br>" +
+                "<b>Basic Pay:</b> ₹" + basic.toFixed(2) + "<br>" +
+                "<b>DA (40%):</b> ₹" + DA.toFixed(2) + "<br>" +
+                "<b>HRA (20%):</b> ₹" + HRA.toFixed(2) + "<br>" +
+                "<b>PF (12%):</b> ₹" + PF.toFixed(2) + "<br>" +
+                "<b>Gross Pay:</b> ₹" + GrossPay.toFixed(2) + "<br>" +
+                "<b>Tax (10%):</b> ₹" + TAX.toFixed(2) + "<br>" +
+                "<b>Total Deduction:</b> ₹" + Deduction.toFixed(2) + "<br>" +
+                "<b>Net Pay:</b> ₹" + NetPay.toFixed(2);
+        }
+    </script>
+</body>
+</html>
