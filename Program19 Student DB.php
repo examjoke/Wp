@@ -84,4 +84,8 @@
   ?>
 </body>
 
+
 </html>
+
+//database name - student_db
+//table name - students
